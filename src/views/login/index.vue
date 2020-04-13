@@ -35,8 +35,8 @@ export default {
       // 表单的数据对象
       form: {
         //   字段参考接口文档
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       // 校验规则对象
       loginRules: {

@@ -1,6 +1,8 @@
 import vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/views/login'
+import home from '@/views/home'
+import Welcome from '@/views/welcome'
 vue.use(VueRouter)
 var router = new VueRouter({
   routes: [
@@ -12,6 +14,17 @@ var router = new VueRouter({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/',
+      component: home,
+      children: [
+        {
+          path: '',
+          name: 'welcome',
+          component: Welcome
+        }
+      ]
     }
   ]
 })
