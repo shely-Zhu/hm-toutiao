@@ -7,8 +7,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 // @是一个路径的别名  src路径  在vue-cli 项目下有效
 // router.js 是目录下的索引文件，默认使用的索引文件
 import router from '@/router'
+import '@/styles/index.less'
+import axios from 'axios'
 Vue.config.productionTip = false
-
+Vue.prototype.$http = axios
 Vue.use(ElementUI)
 
 new Vue({
