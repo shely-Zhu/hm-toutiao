@@ -21,5 +21,9 @@ export default {
   // json.parse 将jason 字符串转换为 JavaScript 对象
   getUser () {
     return JSON.parse(window.sessionStorage.getItem(KEY) || '{}')
+  },
+  clearUser () {
+    // sessionStorage.clear() 清除所有sessionStorage本地存储
+    window.sessionStorage.removeItem(KEY)
   }
 }

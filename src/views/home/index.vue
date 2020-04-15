@@ -72,15 +72,17 @@
         <span class="el-icon-s-fold"
               @click="toggleMenu"></span>
         <span class="text">江苏传智博客科技有限公司</span>
-        <el-dropdown class="my--dropdown">
+        <el-dropdown class="my--dropdown" @command="clickMenu">
           <span class="el-dropdown-link">
-            <img src="../../assets/images/avatar.jpg"
+            <img :src="photo"
                  alt="">
-            下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+            {{name}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="logOut">退出登录</el-dropdown-item>
+            <!-- <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item> -->
+            <!-- <el-dropdown-item icon="el-icon-unlock" @click.native="logOut()">退出登录</el-dropdown-item> -->
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -93,16 +95,47 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     toggleMenu () {
       // 切换菜单栏的展开与收起
       this.isCollapse = !this.isCollapse
+    },
+    setting () {
+      // click 是绑定在原生dom上的事件， 绑定在组件上认为是自定义事件 如果组件内部没有触发 就是无效事件
+      // 想办法绑定在解析后的dom上
+      // 使用修饰符  prevent
+      // console.log('ok')
+      this.$router.push('/setting')
+    },
+    logOut () {
+      // 清除用户信息
+      store.clearUser()
+      // 跳转到登录
+      this.$router.push({ name: 'login' })
+    },
+    //  不加括号： 有默认传参 想接受参数 就不加括号
+    // 加括号： 有实参
+    clickMenu (menuType) {
+      // menuType === 'setting' && this.$router.push({ name: 'setting' })
+      // if (menuType === 'logout') {
+      //   store.clearUser()
+      //   this.$router.push('/login')
+      // }
+      this[menuType]()
     }
   }
 }
