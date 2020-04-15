@@ -1,24 +1,32 @@
 <template>
-    <div class="container">
-       <el-card class="my-card">
-           <img src="../../assets/images/logo_index.png">
-           <el-form ref="loginForm" :model="form" :rules="loginRules" status-icon >
-               <el-form-item prop="mobile">
-                   <el-input v-model="form.mobile" placeholder="please enter your moblie"></el-input>
-               </el-form-item>
-               <el-form-item prop="code">
-                   <el-input v-model="form.code" placeholder="please enter your pwd" style="width:238px;margin-right:10px"></el-input>
-                   <el-button>send code</el-button>
-               </el-form-item>
-               <el-form-item>
-                   <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
-               </el-form-item>
-               <el-form-item>
-                   <el-button type="primary" @click="login" style="width:100%">login</el-button>
-               </el-form-item>
-           </el-form>
-       </el-card>
-    </div>
+  <div class="container">
+    <el-card class="my-card">
+      <img src="../../assets/images/logo_index.png">
+      <el-form ref="loginForm"
+               :model="form"
+               :rules="loginRules"
+               status-icon>
+        <el-form-item prop="mobile">
+          <el-input v-model="form.mobile"
+                    placeholder="please enter your moblie"></el-input>
+        </el-form-item>
+        <el-form-item prop="code">
+          <el-input v-model="form.code"
+                    placeholder="please enter your pwd"
+                    style="width:238px;margin-right:10px"></el-input>
+          <el-button>send code</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary"
+                     @click="login"
+                     style="width:100%">login</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 <script>
 export default {
@@ -41,8 +49,8 @@ export default {
       // 校验规则对象
       loginRules: {
         mobile: [
-          { required: true, message: 'please enter your mob', trigger: 'blur' },
-          { validator: checkMob, trigger: 'blur' }
+          { required: true, message: 'please enter your mob', trigger: 'input' },
+          { validator: checkMob, trigger: 'input' }
         ],
         code: [
           { required: true, message: 'please enter your pwd', trigger: 'blur' },
@@ -59,18 +67,18 @@ export default {
       //   对整个表单进行验证
       this.$refs.loginForm.validate(valid => {
         valid &&
-        this.$http.post(
-          'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-          this.form
-        )
-          .then(res => {
-          // res 响应报文（对象） 数据数据响应主体
-            this.$router.push('/')
-          })
-          .catch(() => {
-          // 请求失败提示
-            this.$message.error('Mob or Pwd wrong')
-          })
+          this.$http.post(
+            'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
+            this.form
+          )
+            .then(res => {
+              // res 响应报文（对象） 数据数据响应主体
+              this.$router.push('/')
+            })
+            .catch(() => {
+              // 请求失败提示
+              this.$message.error('Mob or Pwd wrong')
+            })
         // 验证成功发起登录请求
       })
     }
@@ -85,27 +93,26 @@ export default {
 //  - 原理：在当前组件暴露的标签 都会加上一个属性， data-v-37dfd6fc 唯一的标识，只属于当前组件
 //         .container====>.container[data-v-37dfd6fc]默认加上属性选择器
 //          如果使用其他组件的内容选择器，也会加上[data-v-37dfd6fc]，会导致无效
-.container{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    // center / cover 背景图定位 / 背景图尺寸（backgroundsize省略)
-    // cover 等比缩放 铺满容器 多余裁剪
-    // contain 等比缩放 完全显示在当前容器，可能会存在留白
-    background: url(../../assets/images/login_bg.jpg) no-repeat center / cover;
-.my-card{
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  // center / cover 背景图定位 / 背景图尺寸（backgroundsize省略)
+  // cover 等比缩放 铺满容器 多余裁剪
+  // contain 等比缩放 完全显示在当前容器，可能会存在留白
+  background: url(../../assets/images/login_bg.jpg) no-repeat center / cover;
+  .my-card {
     width: 400px;
     height: 350px;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-60%);
-    img{
-        width: 200px;
-        display: block;
-        margin: 0 auto 30px;
+    transform: translate(-50%, -60%);
+    img {
+      width: 200px;
+      display: block;
+      margin: 0 auto 30px;
     }
+  }
 }
-}
-
 </style>
