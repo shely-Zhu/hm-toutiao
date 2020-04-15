@@ -10,6 +10,7 @@ import fans from '@/views/fans'
 import comments from '@/views/comments'
 import setting from '@/views/setting'
 import NotFound from '@/views/404'
+import store from '@/store'
 vue.use(VueRouter)
 var router = new VueRouter({
   routes: [{
@@ -66,5 +67,15 @@ var router = new VueRouter({
     component: NotFound
   }
   ]
+})
+// 加上全局前置导航守卫
+router.beforeEach((to, from, next) => {
+  // 1,如果是登录路由，方形
+  // to.path === '/login' && next()
+  // 2， 获取用户信息，没有的话拦截路由 跳转到登录页
+  // !store.getUser().token && next('/login')
+  // 3，方形
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
 })
 export default router

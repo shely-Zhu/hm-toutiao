@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import store from '@/store'
 export default {
   data () {
     // 自定义校验的函数
@@ -49,8 +50,8 @@ export default {
       // 校验规则对象
       loginRules: {
         mobile: [
-          { required: true, message: 'please enter your mob', trigger: 'input' },
-          { validator: checkMob, trigger: 'input' }
+          { required: true, message: 'please enter your mob', trigger: 'blur' },
+          { validator: checkMob, trigger: 'blur' }
         ],
         code: [
           { required: true, message: 'please enter your pwd', trigger: 'blur' },
@@ -65,21 +66,35 @@ export default {
       //    不建议使用
       //    注册账号  黑马头条 app 使用app登录，此时的登录就是注册
       //   对整个表单进行验证
-      this.$refs.loginForm.validate(valid => {
-        valid &&
-          this.$http.post(
-            'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-            this.form
-          )
-            .then(res => {
-              // res 响应报文（对象） 数据数据响应主体
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 请求失败提示
-              this.$message.error('Mob or Pwd wrong')
-            })
+      this.$refs.loginForm.validate(async valid => {
+        // valid &&
+        //   this.$http.post(
+        //     'authorizations',
+        //     this.form
+        //   )
+        //     .then(res => {
+        //       console.log(res.data.data)
+        //       // res 响应报文（对象） 数据数据响应主体
+        //       // 存储用户信息
+        //       store.setUser(res.data.data)
+        //       this.$router.push('/')
+        //     })
+        //     .catch(() => {
+        //       // 请求失败提示
+        //       this.$message.error('Mob or Pwd wrong')
+        //     })
         // 验证成功发起登录请求
+        if (valid) {
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.form)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('Mob or Pwd wrong')
+          }
+        }
+        // 怎么去处理 使用await 时候的 失败请求
+        // 捕获异常 try{可能会执行失败的代码}catch(e){处理错误 }
       })
     }
   }
