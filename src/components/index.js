@@ -4,6 +4,7 @@
 // 暴露一个对象 {} 在对象中选项 install 对应一个函数 函数形参是vue对象
 import MyBread from '@/components/my-breadcrumb'
 import MyTest from '@/components/my-test'
+import Mychannel from '@/components/my-channel'
 export default {
   install (Vue) {
     // vue.use 使用插件
@@ -11,5 +12,6 @@ export default {
     // 全局注册即可
     Vue.component(MyBread.name, MyBread)
     Vue.component(MyTest.name, MyTest)
+    Vue.component(Mychannel.name, Mychannel)
   }
 }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import myPlugin from '@/components/'
+import myPlugin from '@/components'
 // import router from './router/router'
 // @是一个路径的别名  src路径  在vue-cli 项目下有效
 // router.js 是目录下的索引文件，默认使用的索引文件
