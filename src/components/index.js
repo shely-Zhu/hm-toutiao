@@ -5,6 +5,9 @@
 import MyBread from '@/components/my-breadcrumb'
 import MyTest from '@/components/my-test'
 import Mychannel from '@/components/my-channel'
+import MyImage from '@/components/my-image'
+import comA from '@/components/com-a'
+import comb from '@/components/com-b'
 export default {
   install (Vue) {
     // vue.use 使用插件
@@ -13,5 +16,8 @@ export default {
     Vue.component(MyBread.name, MyBread)
     Vue.component(MyTest.name, MyTest)
     Vue.component(Mychannel.name, Mychannel)
+    Vue.component(MyImage.name, MyImage)
+    Vue.component(comA.name, comA)
+    Vue.component(comb.name, comb)
   }
 }

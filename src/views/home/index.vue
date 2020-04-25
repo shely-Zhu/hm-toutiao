@@ -14,8 +14,7 @@
                background-color="#002033"
                text-color="#fff"
                active-text-color="#ffd04b"
-               router
-               >
+               router>
         <!-- el-submenu 菜单项包含子集菜单 -->
         <!-- el-menu-item 菜单项不包含子集菜单 -->
         <!-- <el-submenu index="1">
@@ -40,7 +39,7 @@
           <i class="el-icon-s-home"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="/articals">
+        <el-menu-item index="/articles">
           <i class="el-icon-document"></i>
           <span slot="title">内容管理</span>
         </el-menu-item>
@@ -72,15 +71,18 @@
         <span class="el-icon-s-fold"
               @click="toggleMenu"></span>
         <span class="text">江苏传智博客科技有限公司</span>
-        <el-dropdown class="my--dropdown" @command="clickMenu">
+        <el-dropdown class="my--dropdown"
+                     @command="clickMenu">
           <span class="el-dropdown-link">
             <img :src="photo"
                  alt="">
             {{name}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock" command="logOut">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting"
+                              command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock"
+                              command="logOut">退出登录</el-dropdown-item>
             <!-- <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item> -->
             <!-- <el-dropdown-item icon="el-icon-unlock" @click.native="logOut()">退出登录</el-dropdown-item> -->
           </el-dropdown-menu>
@@ -95,16 +97,25 @@
 </template>
 
 <script>
+import eventBus from '@/components/eventBus'
 import store from '@/store'
 export default {
   data () {
     return {
       isCollapse: false,
       name: '',
-      photo: ''
+      photo: '',
+      ass: store.getUser().name
     }
   },
   created () {
+    // 绑定事件
+    eventBus.$on('Updatename', (data) => {
+      this.name = data
+    })
+    eventBus.$on('updatePhoto', (data) => {
+      this.photo = data
+    })
     const user = store.getUser()
     this.name = user.name
     this.photo = user.photo

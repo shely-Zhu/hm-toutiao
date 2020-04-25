@@ -1,6 +1,47 @@
 // 公用样式在styles 里面新建一个index.css里面写
 body {
-    margin: 0;
-    padding:0;
+  margin: 0;
+  padding: 0;
 }
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
 // 覆盖element-ul的样式，需要再全局作用域下书写，之后在mian.js 里面引入
+
+// 仅在发布文章容器下显示
+.article-container .ql-toolbar.ql-snow {
+  padding: 0 8px;
+}
+
+.article-container .ql-editor {
+  height: 50px;
+}
+
+.my-image .el-dialog__body {
+  padding-bottom: 0;
+}

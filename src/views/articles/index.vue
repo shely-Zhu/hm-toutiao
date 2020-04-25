@@ -171,10 +171,11 @@ export default {
       }
     },
     edit (id) {
+      console.log(id)
       // 发布文章和编辑文章使用同一个路由规则
       // 如果使用 params 是路径传参 /publish /publish/1000 两个路由规则
       // 使用query传参  /publish /publish?id=10
-      this.$router.push(`/publish?${id}`)
+      this.$router.push(`/publish?id=${id}`)
     },
     del (id) {
       this.$confirm('亲，此操作将永久删除该文件, 是否继续?', '温馨提示', {
@@ -182,6 +183,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
+        console.log(id)
         await this.$http.delete(`articles/${id}`)
         // 获取到后端的json字符，使用axios默认转换格式，JSON.parse()数字有偏差
         // 原因：后台返回的ID值，超出了JavaScript 的最大安全值

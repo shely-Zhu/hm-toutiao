@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import login from '@/views/login'
 import home from '@/views/home'
 import Welcome from '@/views/welcome'
-import articals from '@/views/articals'
+import articles from '@/views/articles'
 import assets from '@/views/assets'
 import publish from '@/views/publish'
 import fans from '@/views/fans'
@@ -31,9 +31,9 @@ var router = new VueRouter({
       component: Welcome
     },
     {
-      path: '/articals',
-      name: 'articals',
-      component: articals
+      path: '/articles',
+      name: 'articles',
+      component: articles
     },
     {
       path: '/assets',
